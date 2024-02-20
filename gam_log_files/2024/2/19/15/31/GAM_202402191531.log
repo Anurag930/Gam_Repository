@@ -1,0 +1,56 @@
+2024-02-19 15:31:23,099:__init__:INFO:Snowflake Connector for Python Version: 3.6.0, Python Version: 3.11.5, Platform: Windows-10-10.0.19045-SP0
+2024-02-19 15:31:23,099:__config:INFO:This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2024-02-19 15:31:23,944:<module>:INFO:Connected to Snowflake successfully.
+2024-02-19 15:31:23,947:<module>:INFO:Tranformation Done
+2024-02-19 15:31:23,952:main:INFO:Connected to Snowflake successfully.
+2024-02-19 15:31:23,953:main:INFO:Code is Running
+2024-02-19 15:31:24,688:main:INFO:             date                   advertiser  ... trafficker_name                   trafficker_id
+0      03-11-2023                         <NA>  ...            <NA>                            None
+1      03-11-2023                         <NA>  ...            <NA>                            None
+2      03-11-2023                         <NA>  ...            <NA>                            None
+3      03-11-2023                      ADX 2.0  ...   Scott Colter          scolter@redventures.com
+4      03-11-2023                      ADX 2.0  ...   Scott Colter          scolter@redventures.com
+...           ...                          ...  ...             ...                             ...
+25960  02-12-2023                Virtua Health  ...  Janelle Ooten   janelle.ooten@healthgrades.com
+25961  02-12-2023  WellStar Health System, Inc  ...  Janelle Ooten   janelle.ooten@healthgrades.com
+25962  02-12-2023  WellStar Health System, Inc  ...  Janelle Ooten   janelle.ooten@healthgrades.com
+25963  02-12-2023  WellStar Health System, Inc  ...  Janelle Ooten   janelle.ooten@healthgrades.com
+25964         NaN                          NaN  ...            <NA>                            None
+
+[25965 rows x 75 columns]
+2024-02-19 15:31:25,291:create_intials:INFO:put files to stage
+2024-02-19 15:31:25,291:execute:INFO:query: [PUT 'file://C:/Users/anurag.sharma/Documents/test_python_scripts/GAM/gam_files/G...]
+2024-02-19 15:31:26,378:execute:INFO:query execution done
+2024-02-19 15:31:28,497:main:INFO:create_intials done
+2024-02-19 15:31:28,497:execute:INFO:query: [COPY INTO GAM_landing_data  FROM @my_json_stage/C:/Users/anurag.sharma/Documents...]
+2024-02-19 15:31:28,725:execute:INFO:query execution done
+2024-02-19 15:31:28,726:_init_result_and_meta:INFO:Number of results in first chunk: 1
+2024-02-19 15:31:28,726:copy_to_land:INFO:Copied to raw table created successfully
+2024-02-19 15:31:28,726:main:INFO:.copy_to_land done
+2024-02-19 15:31:28,726:execute:INFO:query: [INSERT INTO GAM_FINAL_DATA(payload, trafficker_name, trafficker_id, date_id, hou...]
+2024-02-19 15:31:30,616:execute:INFO:query execution done
+2024-02-19 15:31:30,616:main:INFO:load_to_final created
+2024-02-19 15:31:30,616:validate_null_values:INFO:Validating null values
+
+2024-02-19 15:31:30,616:execute:INFO:query: [SELECT COUNT(*) AS count FROM GAM_FINAL_DATA a, lateral flatten(input => payload...]
+2024-02-19 15:31:37,854:execute:INFO:query execution done
+2024-02-19 15:31:37,855:_init_result_and_meta:INFO:Number of results in first chunk: 1
+2024-02-19 15:31:37,856:validate_null_values:INFO:Zero null values found. Validation successful
+2024-02-19 15:31:37,856:main:INFO:null data validated
+2024-02-19 15:31:37,856:validate_date_id:INFO:Validating date_id values
+
+2024-02-19 15:31:37,856:execute:INFO:query: [SELECT 'DATE_ID' AS FIELD, COUNT(*) AS NO_OF_MISMATCH FROM GAM_FINAL_DATA WHERE ...]
+2024-02-19 15:31:38,167:execute:INFO:query execution done
+2024-02-19 15:31:38,167:_init_result_and_meta:INFO:Number of results in first chunk: 1
+2024-02-19 15:31:38,167:validate_date_id:INFO:DATE_ID Validation successful
+2024-02-19 15:31:38,167:main:INFO:validate_date_id
+2024-02-19 15:31:38,167:validate_trafficker_id:INFO:Validating trafficker_id values
+
+2024-02-19 15:31:38,167:execute:INFO:query: [SELECT 'TRAFFICKER' AS FIELD, COUNT(*) AS NO_OF_MISMATCH FROM GAM_FINAL_DATA WHE...]
+2024-02-19 15:31:38,499:execute:INFO:query execution done
+2024-02-19 15:31:38,499:_init_result_and_meta:INFO:Number of results in first chunk: 1
+2024-02-19 15:31:38,500:validate_trafficker_id:INFO:TRAFFICKER_ID Validation successful
+2024-02-19 15:31:38,500:main:INFO:valiadated_trafficker_id
+2024-02-19 15:31:38,500:main:INFO:Snowflake loading completed successfully.
+2024-02-19 15:31:39,151:close:INFO:closed
+2024-02-19 15:31:39,210:close:INFO:No async queries seem to be running, deleting session
